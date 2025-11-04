@@ -1,0 +1,92 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: attendance_app
+    restart: always
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - attendance
+    depends_on:
+      - db
+    environment:
+      - APP_ENV=production
+      - APP_DEBUG=false
+      - QUEUE_CONNECTION=database
+      - DB_CONNECTION=pgsql
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_DATABASE=AttendanceSystem
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=password@1
+
+  webserver:
+    image: nginx:latest
+    container_name: attendance_nginx
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/html
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - attendance
+    depends_on:
+      - app
+
+  db:
+    image: postgres:15
+    container_name: attendance_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: AttendanceSystem
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "password@1"
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - attendance
+
+  queue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: attendance_queue
+    restart: always
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - attendance
+    depends_on:
+      - app
+    command: php artisan queue:work --tries=3 --timeout=60
+
+  scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: attendance_scheduler
+    restart: always
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - attendance
+    depends_on:
+      - app
+    command: php artisan schedule:work
+
+volumes:
+  pgdata:
+
+networks:
+  attendance:
+    driver: bridge
