@@ -15,12 +15,15 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('device_id');
             $table->integer('uid')->unique(); // unique log id from device
-            $table->integer('user_id');
+            $table->integer('user_id'); // device user_id
+            $table->unsignedBigInteger('student_id')->nullable();
             $table->tinyInteger('state');
             $table->timestamp('record_time');
             $table->tinyInteger('type');
-            $table->foreign('device_id')->references('id')->on('devices')->onDelete('cascade');
             $table->timestamps();
+
+            $table->foreign('device_id')->references('id')->on('devices')->onDelete('cascade');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('set null');
         });
     }
 

@@ -48,6 +48,7 @@ class FetchDeviceLogsJob implements ShouldQueue
                 [
                     'device_id'   => $device->id,
                     'user_id'     => $log['user_id'],
+                    'student_id'  => $log['student_id'] ?? null,
                     'state'       => $log['state'],
                     'record_time' => $log['record_time'],
                     'type'        => $log['type'],

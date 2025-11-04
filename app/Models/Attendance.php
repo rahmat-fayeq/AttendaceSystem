@@ -10,6 +10,7 @@ class Attendance extends Model
         'device_id',
         'uid',
         'user_id',
+        'student_id',
         'state',
         'record_time',
         'type',
@@ -22,5 +23,10 @@ class Attendance extends Model
     public function device()
     {
         return $this->belongsTo(Device::class);
+    }
+
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
     }
 }
