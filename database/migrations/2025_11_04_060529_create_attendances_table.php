@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('device_id');
-            $table->integer('uid')->unique(); // unique log id from device
+            $table->integer('uid');
             $table->integer('user_id'); // device user_id
             $table->unsignedBigInteger('student_id')->nullable();
             $table->tinyInteger('state');

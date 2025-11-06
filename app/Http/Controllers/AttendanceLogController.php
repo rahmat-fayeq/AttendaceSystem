@@ -33,7 +33,7 @@ class AttendanceLogController extends Controller
                 $timeOut = $logs->last()->record_time;
                 $hours = \Carbon\Carbon::parse($timeIn)->diffInHours(\Carbon\Carbon::parse($timeOut));
                 
-                if ($hours >= 4) {
+                if ($hours >= 3) {
                     $status = 'Present';
                 } else {
                     $status = 'Half Day';
