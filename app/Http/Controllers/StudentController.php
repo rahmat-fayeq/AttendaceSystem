@@ -25,7 +25,7 @@ class StudentController extends Controller
             'name' => 'required|string|max:255',
             'father_name' => 'required|string|max:255',
             'department' => 'required|string|max:255',
-            'phone_number' => 'required|string|max:20',
+            'phone_number' => 'nullable|string|max:20',
             'email' => 'nullable|email|unique:students,email',
         ]);
 
@@ -47,7 +47,7 @@ class StudentController extends Controller
             'name' => 'required|string|max:255',
             'father_name' => 'required|string|max:255',
             'department' => 'required|string|max:255',
-            'phone_number' => 'required|string|max:20',
+            'phone_number' => 'nullable|string|max:20',
             'email' => 'nullable|email|unique:students,email,' . $student->id,
         ]);
 

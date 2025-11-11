@@ -35,9 +35,9 @@
                         </div>
 
                         <div class="form-control">
-                            <label class="label"><span class="label-text">Phone Number</span></label>
-                            <input type="text" name="phone_number" class="input input-bordered w-full"
-                                value="{{ $student->phone_number }}" required>
+                            <label class="label"><span class="label-text">Phone Number (optional)</span></label>
+                            <input type="number" name="phone_number" class="input input-bordered w-full"
+                                value="{{ $student->phone_number }}">
                         </div>
 
                         <div class="form-control">

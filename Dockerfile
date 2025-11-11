@@ -17,24 +17,30 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     postgresql-client \
     libpq-dev \
-    && docker-php-ext-install pdo_pgsql pdo_mysql mbstring exif pcntl bcmath gd zip sockets
+    usbutils \
+    udev \
+    minicom \
+    && docker-php-ext-install pdo_pgsql pdo_mysql mbstring exif pcntl bcmath gd zip sockets \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Copy application code
+# Copy project files
 COPY . .
 
-# Install PHP dependencies (production)
+# Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Copy environment file
-COPY .env.example .env
+# Copy default environment file (only if not exists)
+RUN cp .env.example .env || true
 
-# Set permissions
+# Set proper permissions
 RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html/storage
+    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Expose port and start php-fpm
+# Expose port 9000 (PHP-FPM)
 EXPOSE 9000
+
+# Set default command
 CMD ["php-fpm"]
