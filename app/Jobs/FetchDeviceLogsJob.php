@@ -39,15 +39,16 @@ class FetchDeviceLogsJob implements ShouldQueue
 
         $processed = 0;
         $skipped = 0;
-        $notificationJobs = []; // SMS + Email jobs
+        $notificationJobs = []; 
 
         foreach ($logs as $log) {
             $recordTime = Carbon::parse($log['record_time']);
             $recordDate = $recordTime->toDateString();
 
-            // Avoid duplicates within 3 hours
+            // Avoid duplicates of the same type within 3 hours
             $exists = Attendance::where('user_id', $log['user_id'])
                 ->where('device_id', $device->id)
+                ->where('type', $log['type'])
                 ->whereBetween('record_time', [
                     $recordTime->copy()->subHours(3),
                     $recordTime->copy()->addHours(3),
