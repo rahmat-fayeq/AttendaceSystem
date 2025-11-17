@@ -2,28 +2,30 @@
 
 @section('content')
     <div class="container p-5">
-        <h1 class="text-2xl font-semibold mb-5 text-center">Students</h1>
+        <h1 class="text-2xl font-semibold mb-5 text-center">{{ __('app.students') }}</h1>
 
         @if (session('success'))
             <div class="alert alert-success mb-4">{{ session('success') }}</div>
         @endif
 
-        <div class="flex justify-end mb-4">
-            <a href="{{ route('students.create') }}" class="btn btn-primary">+ Add Student</a>
+        <div class="flex mb-4">
+            <a href="{{ route('students.create') }}" class="btn btn-primary">+ {{ __('app.add_new') }}</a>
+
         </div>
+
 
         <div class="overflow-x-auto">
             <table class="table w-full">
                 <thead>
                     <tr class="text-center">
                         <th>#</th>
-                        <th>Name</th>
-                        <th>Father Name</th>
-                        <th>Department</th>
-                        <th>Phone</th>
-                        <th>Email</th>
-                        <th>Device User ID</th>
-                        <th>Actions</th>
+                        <th>{{ __('app.name') }}</th>
+                        <th>{{ __('app.father_name') }}</th>
+                        <th>{{ __('app.department') }}</th>
+                        <th>{{ __('app.phone') }}</th>
+                        <th>{{ __('app.email') }}</th>
+                        <th>{{ __('app.device_user_id') }}</th>
+                        <th>{{ __('app.actions') }}</th>
                     </tr>
                 </thead>
                 <tbody>

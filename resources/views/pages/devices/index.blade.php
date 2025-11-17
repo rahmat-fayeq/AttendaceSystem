@@ -2,32 +2,29 @@
 
 @section('content')
     <div class="container p-5">
-        <h1 class="text-2xl font-semibold mb-5 text-center">Attendance Devices</h1>
+        <h1 class="text-2xl font-semibold mb-5 text-center">{{ __('app.devices') }}</h1>
 
         @if (session('success'))
             <div class="alert alert-success mb-4">{{ session('success') }}</div>
         @endif
 
         <div class="flex justify-between mb-6">
-            <a href="{{ route('devices.create') }}" class="btn btn-primary">+ Add New Device</a>
-            <a href="#" class="btn btn-secondary">Fetch Attendance Now</a>
+            <a href="{{ route('devices.create') }}" class="btn btn-primary">+ {{ __('app.add_new') }}</a>
         </div>
 
         <div class="card bg-base-100 shadow-xl">
             <div class="card-body">
-                <h2 class="card-title text-lg mb-4">Registered Devices</h2>
-
                 <div class="overflow-x-auto">
                     <table class="table w-full">
                         <thead>
                             <tr class="text-center">
                                 <th>#</th>
-                                <th>Device Name</th>
-                                <th>IP Address</th>
-                                <th>Port</th>
-                                <th>Status</th>
-                                <th>Connection</th>
-                                <th>Actions</th>
+                                <th>{{ __('app.name') }}</th>
+                                <th>{{ __('app.ip_address') }}</th>
+                                <th>{{ __('app.port') }}</th>
+                                <th>{{ __('app.status') }}</th>
+                                <th>{{ __('app.connection') }}</th>
+                                <th>{{ __('app.actions') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,21 +48,21 @@
                                     </td>
                                     <td class="space-x-2">
                                         <a href="{{ route('devices.edit', $device) }}"
-                                            class="btn btn-sm btn-warning">Edit</a>
+                                            class="btn btn-sm btn-warning">{{ __('app.edit') }}</a>
                                         <form action="{{ route('devices.destroy', $device) }}" method="POST"
                                             class="inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-error"
-                                                onclick="return confirm('Delete this device?')">Delete</button>
+                                                onclick="return confirm('Delete this device?')">{{ __('app.delete') }}</button>
                                         </form>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
                                     <td colspan="6" class="text-center text-gray-500 py-4">
-                                        No devices found. <a href="{{ route('devices.create') }}"
-                                            class="text-blue-500 underline">Add one now</a>.
+                                        {{ __('app.not_found') }} <a href="{{ route('devices.create') }}"
+                                            class="text-blue-500 underline">{{ __('app.add_new') }}</a>.
                                     </td>
                                 </tr>
                             @endforelse
