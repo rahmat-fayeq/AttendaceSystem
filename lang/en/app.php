@@ -45,4 +45,10 @@ return [
     'forgot_password' => 'Forgot Password?',
     'remember_me' => 'Remember Me',
 
+    // toast notifications
+    'success' => 'Data added successfully.',
+    'error' => 'Something went wrong, try again.',
+    'info' => 'Data updated successfully.',
+    'warning' => 'Data deleted successfully.',
+
 ];

@@ -11,6 +11,7 @@
     "require": {
         "php": "^8.2",
         "coding-libs/zkteco-php": "^0.0.34",
+        "devrabiul/laravel-toaster-magic": "^1.5",
         "gregwar/php-serial": "dev-master",
         "laravel/fortify": "^1.31",
         "laravel/framework": "^12.0",

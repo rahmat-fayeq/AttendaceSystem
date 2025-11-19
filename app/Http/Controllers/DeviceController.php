@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Device;
 use Illuminate\Http\Request;
+use Devrabiul\ToastMagic\Facades\ToastMagic;
 
 class DeviceController extends Controller
 {
@@ -32,7 +33,9 @@ class DeviceController extends Controller
 
         Device::create($validated);
 
-        return redirect()->route('devices.index')->with('success', 'Device registered successfully!');
+        ToastMagic::success(__('app.success'));
+
+        return redirect()->route('devices.index');
     }
 
     public function edit(Device $device)
@@ -54,12 +57,15 @@ class DeviceController extends Controller
 
         $device->update($validated);
 
-        return redirect()->route('devices.index')->with('success', 'Device updated successfully!');
+         ToastMagic::info(__('app.info'));
+
+        return redirect()->route('devices.index');
     }
 
     public function destroy(Device $device)
     {
         $device->delete();
-        return redirect()->route('devices.index')->with('success', 'Device deleted successfully!');
+        ToastMagic::warning(__('app.warning'));
+        return redirect()->route('devices.index');
     }
 }

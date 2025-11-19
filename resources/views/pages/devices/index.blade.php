@@ -4,10 +4,6 @@
     <div class="container p-5">
         <h1 class="text-2xl font-semibold mb-5 text-center">{{ __('app.devices') }}</h1>
 
-        @if (session('success'))
-            <div class="alert alert-success mb-4">{{ session('success') }}</div>
-        @endif
-
         <div class="flex justify-between mb-6">
             <a href="{{ route('devices.create') }}" class="btn btn-primary">+ {{ __('app.add_new') }}</a>
         </div>

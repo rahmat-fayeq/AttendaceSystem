@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use Devrabiul\ToastMagic\Facades\ToastMagic;
 
 class StudentController extends Controller
 {
@@ -29,10 +30,11 @@ class StudentController extends Controller
             'email' => 'nullable|email|unique:students,email',
         ]);
 
-        $student = Student::create($validated);
+        Student::create($validated);
 
-        return redirect()->route('students.index')
-            ->with('success', 'Student added successfully!');
+        ToastMagic::success(__('app.success'));
+
+        return redirect()->route('students.index');
     }
 
     public function edit(Student $student)
@@ -53,13 +55,17 @@ class StudentController extends Controller
 
         $student->update($validated);
 
-        return redirect()->route('students.index')
-            ->with('success', 'Student updated successfully!');
+        ToastMagic::info(__('app.info'));
+
+        return redirect()->route('students.index');
     }
 
     public function destroy(Student $student)
     {
         $student->delete();
+
+        ToastMagic::warning(__('app.warning'));
+
         return redirect()->route('students.index')
             ->with('success', 'Student deleted successfully!');
     }

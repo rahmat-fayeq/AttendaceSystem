@@ -11,6 +11,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
+     <!-- Toast notification -->
+    {!! ToastMagic::styles() !!}
+
     <!-- Styles / Scripts -->
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -20,7 +23,6 @@
             </style>
         @endif
     </script>
-        
 </head>
 
 <body class="min-h-screen w-full flex flex-col bg-base-200" style=" font-family: Amiri, serif; font-weight: 600">
@@ -31,6 +33,7 @@
     </main>
 
     @include('layout.footer')
+     {!! ToastMagic::scripts() !!}
 </body>
 
 <script>
