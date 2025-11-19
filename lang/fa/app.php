@@ -37,4 +37,11 @@ return [
     'daily_report' => 'گزارش حاضری روزانه',
 
     'not_found' => 'هیچ موردی یافت نشد',
+
+    // login 
+    'signin' => 'ورود به سیستم',
+    'email' => 'ایمیل آدرس',
+    'password' => 'رمزعبور',
+    'forgot_password' => 'رمزعبور فراموش شده؟',
+    'remember_me' => 'بخاطر بسپار',
 ];

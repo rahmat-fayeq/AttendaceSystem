@@ -37,4 +37,12 @@ return [
     'daily_report' => 'Daily Attendace Report',
 
     'not_found' => ' No items found',
+
+    // login 
+    'signin' => 'Sign In',
+    'email' => 'Email Address',
+    'password' => 'Password',
+    'forgot_password' => 'Forgot Password?',
+    'remember_me' => 'Remember Me',
+
 ];
