@@ -39,7 +39,7 @@ return [
     'not_found' => ' No items found',
 
     // login 
-    'signin' => 'Sign In',
+    'signin' => 'SignIn',
     'email' => 'Email Address',
     'password' => 'Password',
     'forgot_password' => 'Forgot Password?',

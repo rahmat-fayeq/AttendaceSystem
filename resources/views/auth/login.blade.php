@@ -3,6 +3,9 @@
     <div class="min-h-screen flex flex-col items-center justify-center py-6 px-4">
         <div class="max-w-[480px] w-full">
             <div class="p-6 sm:p-8 rounded-2xl bg-base-100 border border-base-300 shadow-sm">
+                <div class="flex justify-center items-center content-center mb-1">
+                    <i class="fa fa-sign-in" aria-hidden="true"></i>
+                </div>
                 <h1 class="text-center text-3xl font-semibold text-base-content">{{ __('app.signin') }}</h1>
                 <form method="post" action="{{ route('login.store') }}" class="mt-12 space-y-6">
                     @csrf
@@ -62,7 +65,7 @@
                     <div class="mt-12">
                         <button type="submit"
                             class="btn btn-primary w-full text-[15px] font-medium tracking-wide hover:scale-105 transition-all">
-                            {{ __('app.signin') }}
+                            {{ __('app.signin') }} <i class="fa fa-sign-in" aria-hidden="true"></i>
                         </button>
                     </div>
                 </form>
