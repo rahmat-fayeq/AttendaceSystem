@@ -19,9 +19,31 @@ class Device extends Model
         return $this->hasMany(Attendance::class);
     }
 
+    public function getIsConnectedAttribute(): bool
+    {
+        return cache()->remember("device_conn_{$this->id}", 60, function () {
+            if (!$this->is_active){
+                return false;
+            }   
+            try {
+                $zk = new ZKTeco($this->ip_address, $this->port ?? 4370, false, 25, $this->comm_key ?? 0);
+                if ($zk->connect()) {
+                    $zk->disconnect();
+                    return true;
+                }
+                return false;
+            } catch (\Throwable $e) {
+                Log::warning("ZKTeco connection check failed for device {$this->name}: " . $e->getMessage());
+                return false;
+            }
+        });
+    }
+
     public function fetchAttendanceLogs()
     {
-        if (!$this->is_active) return false;
+         if (!$this->is_active || !$this->is_connected) {
+            return false;
+        }
 
         try {
             $zk = new ZKTeco($this->ip_address, $this->port ?? 4370, false, 25, $this->comm_key ?? 0);
@@ -42,23 +64,6 @@ class Device extends Model
 
         } catch (\Throwable $e) {
             Log::error("ZKTeco connection failed for device {$this->name}: " . $e->getMessage());
-            return false;
-        }
-    }
-
-    public function getIsConnectedAttribute(): bool
-    {
-        if (!$this->is_active) return false;
-
-        try {
-            $zk = new ZKTeco($this->ip_address, $this->port ?? 4370, false, 25, $this->comm_key ?? 0);
-            if ($zk->connect()) {
-                $zk->disconnect();
-                return true;
-            }
-            return false;
-        } catch (\Throwable $e) {
-            Log::warning("ZKTeco connection check failed for device {$this->name}: " . $e->getMessage());
             return false;
         }
     }
