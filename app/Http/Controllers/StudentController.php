@@ -32,7 +32,7 @@ class StudentController extends Controller
 
         Student::create($validated);
 
-        ToastMagic::success(__('app.success'));
+        ToastMagic::success(__('app.add'));
 
         return redirect()->route('students.index');
     }
@@ -55,7 +55,7 @@ class StudentController extends Controller
 
         $student->update($validated);
 
-        ToastMagic::info(__('app.info'));
+        ToastMagic::info(__('app.edit'));
 
         return redirect()->route('students.index');
     }
@@ -64,7 +64,7 @@ class StudentController extends Controller
     {
         $student->delete();
 
-        ToastMagic::warning(__('app.warning'));
+        ToastMagic::warning(__('app.delete'));
 
         return redirect()->route('students.index')
             ->with('success', 'Student deleted successfully!');

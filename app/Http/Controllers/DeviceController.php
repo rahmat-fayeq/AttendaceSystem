@@ -33,7 +33,7 @@ class DeviceController extends Controller
 
         Device::create($validated);
 
-        ToastMagic::success(__('app.success'));
+        ToastMagic::success(__('app.add'));
 
         return redirect()->route('devices.index');
     }
@@ -57,7 +57,7 @@ class DeviceController extends Controller
 
         $device->update($validated);
 
-         ToastMagic::info(__('app.info'));
+         ToastMagic::info(__('app.edit'));
 
         return redirect()->route('devices.index');
     }
@@ -65,7 +65,7 @@ class DeviceController extends Controller
     public function destroy(Device $device)
     {
         $device->delete();
-        ToastMagic::warning(__('app.warning'));
+        ToastMagic::warning(__('app.delete'));
         return redirect()->route('devices.index');
     }
 }
