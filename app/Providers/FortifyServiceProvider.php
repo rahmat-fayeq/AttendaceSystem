@@ -6,13 +6,16 @@ use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
+use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Actions\RedirectIfTwoFactorAuthenticatable;
 use Laravel\Fortify\Fortify;
+use Laravel\Fortify\Contracts\LogoutResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -21,7 +24,13 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->instance(LogoutResponse::class, new class implements LogoutResponse
+        {
+            public function toResponse($request)
+            {
+                return redirect('/login'); 
+            }
+        });
     }
 
     /**
@@ -31,6 +40,23 @@ class FortifyServiceProvider extends ServiceProvider
     {
         Fortify::loginView(function () {
             return view('auth.login');
+        });
+
+        // Customize authentication logic
+        Fortify::authenticateUsing(function (Request $request) {
+            $user = User::where('email', $request->email)->first();
+            if (
+                $user &&
+                Hash::check($request->password, $user->password) &&
+                $user->active 
+            ) {
+                return $user;
+            }
+            return null;
+        });
+
+        Fortify::registerView(function () {
+            return view('pages.account.create');
         });
 
         Fortify::createUsersUsing(CreateNewUser::class);

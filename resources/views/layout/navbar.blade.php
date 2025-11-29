@@ -22,6 +22,14 @@
                     </ul>
                 </details>
             </li>
+            <li>
+                <details>
+                    <summary>{{ __('app.settins') }}</summary>
+                    <ul class="p-2">
+                        <li><a href="{{ route('accounts.index') }}">{{ __('app.users') }}</a></li>
+                    </ul>
+                </details>
+            </li>
         </ul>
     </div>
     <div class="navbar-end">
@@ -136,7 +144,8 @@
                     </span>
                 </label>
 
-                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-40">
+                <ul tabindex="0"
+                    class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-40 hover:scale-105 transition-all">
                     <li>
                         <a href="{{ route('locale.change', 'en') }}" class="flex items-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
@@ -252,19 +261,25 @@
 
 
             <div class="navbar-end">
-                <button id="theme-toggle" class="btn btn-ghost btn-circle">
+                <button id="theme-toggle" class="btn btn-ghost btn-circle hover:scale-110 transition-all">
                     <span id="icon-light">🌞</span>
                     <span id="icon-dark" class="hidden">🌙</span>
                 </button>
             </div>
-            <a class="btn btn-sm btn-secondary">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="lucide lucide-log-out-icon lucide-log-out">
-                    <path d="m16 17 5-5-5-5" />
-                    <path d="M21 12H9" />
-                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                </svg></a>
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-sm btn-secondary hover:scale-105 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="lucide lucide-log-out-icon lucide-log-out">
+                        <path d="m16 17 5-5-5-5" />
+                        <path d="M21 12H9" />
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                    </svg>
+                </button>
+
+            </form>
+
         </div>
     </div>
 </div>
