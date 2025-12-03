@@ -3,7 +3,7 @@
         <a class="btn btn-ghost text-xl" href="/">{{ __('app.title') }}</a>
     </div>
     <div class="navbar-center hidden lg:flex">
-        <ul class="menu menu-horizontal px-1">
+        <ul class="menu menu-horizontal px-1 z-100">
             <li><a href="{{ route('devices.index') }}">{{ __('app.devices') }}</a></li>
             <li>
                 <details>
@@ -26,6 +26,7 @@
                 <details>
                     <summary>{{ __('app.settins') }}</summary>
                     <ul class="p-2">
+                        <li><a href="{{ route('user-profile-information.index') }}">{{ __('app.profile') }}</a></li>
                         <li><a href="{{ route('accounts.index') }}">{{ __('app.users') }}</a></li>
                     </ul>
                 </details>

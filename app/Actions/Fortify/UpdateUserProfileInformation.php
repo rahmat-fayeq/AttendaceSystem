@@ -10,6 +10,11 @@ use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
 
 class UpdateUserProfileInformation implements UpdatesUserProfileInformation
 {
+
+    public function index()
+    {
+        return view('pages.account.profile');
+    }
     /**
      * Validate and update the given user's profile information.
      *

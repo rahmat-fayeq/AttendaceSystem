@@ -58,4 +58,9 @@ return [
     'create_account' => 'حساب',
 
     'users' => 'کاربران',
+    'profile' => 'پروفایل',
+    'profile_information' => 'حساب من',
+    'change_password' => 'تغیر رمزعبور',
+    'current_password' => 'رمزعبور فعلی',
+    'send-password-reset-link' => 'ارسال لینک تنظیم مجدید رمزعبور',
 ];

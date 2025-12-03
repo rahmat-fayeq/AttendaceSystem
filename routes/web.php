@@ -1,5 +1,6 @@
 <?php
 
+use App\Actions\Fortify\UpdateUserProfileInformation;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AttendanceLogController;
 use App\Http\Controllers\DeviceController;
@@ -14,4 +15,6 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('students', StudentController::class)->except('show');
     Route::get('/attendance/daily', [AttendanceLogController::class,'index'])->name('attendance.daily');
     Route::resource('accounts', AccountController::class)->except(['show']);
+    // Profile Route
+    Route::get('/profile', [UpdateUserProfileInformation::class,'index'])->name('user-profile-information.index');
 });

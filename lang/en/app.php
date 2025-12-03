@@ -58,5 +58,10 @@ return [
     'create_account' => 'Account',
 
     'users' => 'Users',
+    'profile' => 'Profile',
+    'profile_information' => 'My Profile',
+    'change_password' => 'Change Password',
+    'current_password' => 'Current Password',
+    'send-password-reset-link' => 'Send Password Reset Link',
 
 ];
